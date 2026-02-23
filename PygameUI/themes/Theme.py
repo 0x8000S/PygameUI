@@ -1,3 +1,4 @@
+from re import L
 import sys
 import pygame
 from typing import Tuple
@@ -33,6 +34,8 @@ class ThemeFontData:
             self.FontSize = Size
         elif isinstance(Size, FontSize):
             self.FontSize = Size.value
+        self.Font = pygame.font.SysFont(self.FontName, self.FontSize)
+    def ChangeFont(self, font_file:str):
         self.Font = pygame.font.SysFont(self.FontName, self.FontSize)
 
 class Theme:

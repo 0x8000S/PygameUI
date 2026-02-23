@@ -5,7 +5,8 @@
 已完成的部分✅
 
 * [X] Widget 所有控件的父类
-* [X] Button 文字按钮
+* [X] Button 文字按钮组件
+* [X] Label 文本组件
 
 计划中的🚧
 

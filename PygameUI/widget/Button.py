@@ -2,6 +2,7 @@ import pygame
 from .. import themes
 from . import Widget
 from ..utils import EqEventFunction
+from .. import widget
 from enum import Enum
 
 class WidgetEvent(Enum):
@@ -16,65 +17,37 @@ class Button(Widget.Widget):
     Events = WidgetEvent
     def __init__(self, text:str, font_size:int|Widget.themes.Theme.FontSize, x:int, y:int, width:int|str, height:int|str, border:bool, border_width:int, parent = None):
         super().__init__(x, y, width, height, parent)
-        self._text = text
+        self.text = widget.Label.Label(text, font_size, x, y)
+        self.text.When(widget.Label.WidgetEvent.Update, self.ReflashText)
         self.border = border
         self.border_width = border_width
-        self._font_size = font_size
-        self.theme.Font.ChangeSize(font_size)
         self.theme_background_color = self.theme.Data.MainColor
         self.theme_border_color = self.theme.Data.BorderColor
-        self._theme_font_color = self.theme.Font.FontColor
-        self.font_image = self.theme.Font.Font.render(self.text, True, self.theme_font_color)
         self._auto_width:bool = False
         self._auto_height:bool = False
-        self.font = self.font_image.get_rect()
         if isinstance(self.width, str):
-            self.width = self.font.width+10
+            self.width = self.text.font.width+10
             self._auto_width = True
         if isinstance(self.height, str):
-            self.height = self.font.height+10
+            self.height = self.text.font.height+10
             self._auto_height = True
         self.background_rect = pygame.rect.Rect(self.x, self.y, self.width, self.height)
         self.border_rect = pygame.rect.Rect(self.x-self.border_width, self.y-self.border_width, self.width+self.border_width*2, self.height+self.border_width*2)
-        self.font.topleft = (self.background_rect.x+self.background_rect.width/2-self.font.width/2, self.background_rect.y+self.background_rect.height/2-self.font.height/2)
+        self.text.font.topleft = (self.background_rect.x+self.background_rect.width/2-self.text.font.width/2, self.background_rect.y+self.background_rect.height/2-self.text.font.height/2)
         self.When(self.cevent.MouseIn, self._MouseInEvent)
         self.When(self.cevent.MouseExit, self._MouseExitEvent)
-    @property
-    def font_size(self):
-        return self._font_size
-    @font_size.setter
-    def font_size(self, val):
-        self._font_size = val
-        self.theme.Font.ChangeSize(self.font_size)
-        self.ChangeText()
-    @property
-    def text(self):
-        return self._text
-    @text.setter
-    def text(self, val):
-        self._text = val
-        self.ChangeText()
-    def ChangeText(self):
-        self.ChangeFontColor()
+    def GetText(self) -> str:
+        return self.text.text
+    def ReflashText(self, w):
+        self.text.font.topleft = (self.background_rect.x+self.background_rect.width/2-self.text.font.width/2, self.background_rect.y+self.background_rect.height/2-self.text.font.height/2)
         if self._auto_width:
-            self.width = self.font.width+10
+            self.width = self.text.font.width+10
         if self._auto_height:
-            self.height = self.font.height+10
+            self.height = self.text.font.height+10
         self.background_rect = pygame.rect.Rect(self.x, self.y, self.width, self.height)
         self.border_rect = pygame.rect.Rect(self.x-self.border_width, self.y-self.border_width, self.width+self.border_width*2, self.height+self.border_width*2)
-        self.font.topleft = (self.background_rect.x+self.background_rect.width/2-self.font.width/2, self.background_rect.y+self.background_rect.height/2-self.font.height/2)
+        self.text.font.topleft = (self.background_rect.x+self.background_rect.width/2-self.text.font.width/2, self.background_rect.y+self.background_rect.height/2-self.text.font.height/2)
         
-    @property
-    def theme_font_color(self):
-        return self._theme_font_color
-    @theme_font_color.setter
-    def theme_font_color(self, val):
-        self._theme_font_color = val
-        self.ChangeFontColor()
-    def ChangeFontColor(self):
-        self.font_image = self.theme.Font.Font.render(self.text, True, self.theme_font_color)
-        self.font = self.font_image.get_rect()
-        self.font.topleft = (self.background_rect.x+self.background_rect.width/2-self.font.width/2, self.background_rect.y+self.background_rect.height/2-self.font.height/2)
     def _MouseInEvent(self, w):
         self.theme_border_color = self.theme.Data.BorderHoverColor
     def _MouseExitEvent(self, w):
@@ -101,7 +74,7 @@ class Button(Widget.Widget):
             return False
         pygame.draw.rect(surface, self.theme_border_color, self.border_rect)
         pygame.draw.rect(surface, self.theme_background_color, self.background_rect)
-        surface.blit(self.font_image, (self.font.x, self.font.y))
+        self.text.Draw(surface)
         
         return True
     
