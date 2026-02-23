@@ -39,6 +39,7 @@ class Label(Widget.Widget):
         self._text = val
         self.ChangeText()
     def ChangeText(self):
+        
         self.width = self.font.width
         self.height = self.font.height
         self.font.topleft = (self.x, self.y)

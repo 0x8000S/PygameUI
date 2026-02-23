@@ -1,7 +1,7 @@
 import pygame
 from .. import themes
 from . import Widget
-from ..utils import EqEventFunction
+
 from .. import widget
 from enum import Enum
 

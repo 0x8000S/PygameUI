@@ -1,6 +1,6 @@
-from .Theme import Theme
+from . import Theme
 
 
-def GetDefaultTheme() -> Theme:
+def GetDefaultTheme() -> Theme.Theme:
     from . import Default
     return Default.DTheme
