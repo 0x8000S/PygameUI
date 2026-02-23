@@ -1,3 +1,3 @@
-from . import Widget
-from . import Button
-from . import Label
+from .Widget import Widget
+from .Button import Button
+from .Label import Label
