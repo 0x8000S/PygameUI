@@ -1,4 +1,9 @@
 import sys
+from . import widget
+from . import utils
+from . import themes
+from . import container
+
 
 try:
     import pygame

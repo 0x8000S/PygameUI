@@ -1,7 +1,16 @@
-# Pygame UI计划
-目前已完成：
-- [x] Button(按钮)
-- [x] Input(输入框) 
-- [x] RadioButton(单选框)
-- [x] Slidebar(拖动条)
-- [ ] MessageBox(弹窗)-正在制作中
+# Pygame UI
+
+本模块目标为为pygame添加ui的支持，方便游戏内UI的创建
+
+已完成的部分✅
+
+* [X] Widget 所有控件的父类
+* [X] Button 文字按钮
+
+计划中的🚧
+
+* [ ] 复选框组件
+* [ ] 下拉菜单组件
+* [ ] 文本输入框组件
+* [ ] 水平布局
+* [ ] 垂直布局
