@@ -1,6 +1,6 @@
 # PygameUI
 
-一个轻量级、面向对象的 Pygame GUI 框架。
+一个轻量级、面向对象的 Pygame GUI 框架。![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ### 特性
 
@@ -17,11 +17,15 @@
 * [X] Widget 所有控件的父类
 * [X] Button 文字按钮组件
 * [X] Label 文本组件
+* [X] CheckBox 复选框组件
+* [X] Container 所有布局组件的父类
+* [X] HBoxLayout 水平布局管理器
+* [X] VBoxLayout 垂直布局管理器
 
 计划中的🚧
 
-* [ ] 复选框组件
+* [X] ~~复选框组件~~
 * [ ] 下拉菜单组件
 * [ ] 文本输入框组件
-* [ ] 水平布局
-* [ ] 垂直布局
+* [X] ~~水平布局~~
+* [X] ~~垂直布局~~

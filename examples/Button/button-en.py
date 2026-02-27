@@ -3,7 +3,7 @@ import pygame
 
 # 作者: 氢気氚 (我的英文水平还算凑活吧)
 # This is a show button widget's example file
-# You can cd to the project root path, and run `python -m examples.button` command.
+# You can cd to the project root path, and run `python -m examples.Button.button-en` command.
 
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
@@ -38,7 +38,7 @@ while running:
     # The draw must before update, Else pygame will raise error
     
     PygameUI.widget.Widget.WidgetManage.Draw(screen) # For all based on widgets to call Draw method.
-    PygameUI.widget.Widget.WidgetManage.Update()# For all based on widgets to call Update method.
+    PygameUI.widget.Widget.WidgetManage.Update() # For all based on widgets to call Update method.
     pygame.display.flip()
 
 pygame.quit()
